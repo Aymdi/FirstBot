@@ -37,8 +37,16 @@ def add_position(P, va, vb):
         on = o + do
         P.append(np.array([xn, yn, on]))
 
-P = [np.array([0, 0, 0])]
-plotter = Plotter(1000, 1000)
-while(True):
-    plotter.plot2(P[len(P) - 1][0], P[len(P) - 1][1])
-    add_position(P, 2.99, 3.0)
+if __name__=="__main__":
+    P = [np.array([0, 0, 0])]
+    plotter = Plotter(1000, 1000)
+    m = motor()
+    pa = 
+    pb = 
+    while(True):
+        pan = 
+        pbn = 
+        plotter.plot2(P[len(P) - 1][0], P[len(P) - 1][1])
+        add_position(P, pan - pa, pbn - pb)
+        pa = pan
+        pb = pbn
