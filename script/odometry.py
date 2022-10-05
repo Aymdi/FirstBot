@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import cv2
 import motor
 L = 16.5
+R = 2.5
 
 class Plotter:
     def __init__(self, plot_width, plot_height):
@@ -39,6 +40,12 @@ def add_position(P, va, vb):
         on = o + do
         P.append(np.array([xn, yn, on]))
 
+def angle_diff(a,b):
+    d = a - b
+    if(d>np.pi):
+        d -= 2*np.pi
+    return d
+
 if __name__=="__main__":
     P = [np.array([0, 0, 0])]
     plotter = Plotter(1000, 1000)
@@ -46,7 +53,8 @@ if __name__=="__main__":
     pa, pb = m.get_position()
     while(True):
         pan, pbn = m.get_position()
+
         plotter.plot2(P[len(P) - 1][0], P[len(P) - 1][1])
-        add_position(P, pan - pa, pbn - pb)
+        add_position(P, R * angle_diff(pan, pa), R * angle_diff(pbn - pb))
         pa = pan
         pb = pbn
