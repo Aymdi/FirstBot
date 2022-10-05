@@ -44,17 +44,19 @@ def angle_diff(a,b):
     d = a - b
     if(d>np.pi):
         d -= 2*np.pi
+    if(d<-np.pi):
+        d += 2*np.pi
     return d
 
 if __name__=="__main__":
     P = [np.array([0, 0, 0])]
     plotter = Plotter(1000, 1000)
-    m = motor()
+    m = motor.motor()
     pa, pb = m.get_position()
     while(True):
         pan, pbn = m.get_position()
 
         plotter.plot2(P[len(P) - 1][0], P[len(P) - 1][1])
-        add_position(P, R * angle_diff(pan, pa), R * angle_diff(pbn - pb))
+        add_position(P, R * angle_diff(pan, pa), R * angle_diff(pbn, pb))
         pa = pan
         pb = pbn
