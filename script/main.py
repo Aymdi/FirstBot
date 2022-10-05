@@ -1,12 +1,12 @@
-
+import motor
 
 if __name__ == "__main__" :
 
-    mManagement = None
-
+    robot = motor()
     try :
         while True:
-            #TODO
+            robot.move(left_value=6, right_value=6) #rad/s
 
     finally:
-        mManagement.stop_routine()
+        robot.stop()
+        robot.unclock()
