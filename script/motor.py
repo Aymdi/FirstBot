@@ -38,6 +38,11 @@ class motor:
         speeds = self.dxl_io.get_moving_speed([self.left,self.right])
         left_speed, right_speed = speeds[0], speeds[1]
         return left_speed, right_speed
+    
+    def get_position(self):
+        positions =self.dxl_io.get_present_position([self.left,self.right])
+        left_position, right_position = math.radians(positions[0]), math.radians(positions[1]) #converted to rad
+        return left_position, right_position
 
 
 if __name__=="__main__":
