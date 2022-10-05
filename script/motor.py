@@ -21,8 +21,8 @@ class motor:
 
     def move(self, left_value, right_value):
         # leff_value and right_value in rad/s
-        self.dxl_io.set_moving_speed({self.left: math.degrees(-left_value)})
-        self.dxl_io.set_moving_speed({self.right: math.degrees(right_value)})
+        self.dxl_io.set_moving_speed({self.left: math.degrees(left_value)})
+        self.dxl_io.set_moving_speed({self.right: math.degrees(-right_value)})
 
     def stop(self):
         self.dxl_io.set_moving_speed({self.left: math.degrees(0)})
