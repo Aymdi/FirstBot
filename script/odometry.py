@@ -1,6 +1,8 @@
+from doctest import script_from_examples
 import numpy as np
 import matplotlib.pyplot as plt
 import cv2
+import motor
 L = 16.5
 
 class Plotter:
@@ -41,11 +43,9 @@ if __name__=="__main__":
     P = [np.array([0, 0, 0])]
     plotter = Plotter(1000, 1000)
     m = motor()
-    pa = 
-    pb = 
+    pa, pb = m.get_position()
     while(True):
-        pan = 
-        pbn = 
+        pan, pbn = m.get_position()
         plotter.plot2(P[len(P) - 1][0], P[len(P) - 1][1])
         add_position(P, pan - pa, pbn - pb)
         pa = pan
