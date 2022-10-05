@@ -15,7 +15,7 @@ BLACK_END = np.array([180,255,30])
 
 if __name__ == "__main__" :
     
-    robot = motor()
+    robot = motor.motor()
     cam = cv2.VideoCapture(0)
     
     try :
