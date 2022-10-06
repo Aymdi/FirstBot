@@ -25,6 +25,6 @@ def position(color_start, color_end, cam):
   position_x = 0
   position_y =(A + B)/2
 
-  cv2.imshow('new_video',mask)
+  # cv2.imshow('new_video',mask)
 
   return (position_x, position_y)

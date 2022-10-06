@@ -1,7 +1,6 @@
 import pypot.dynamixel
 import math
 import time
-import numpy as np
     
 
 class motor:
