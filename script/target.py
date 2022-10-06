@@ -24,5 +24,5 @@ if __name__=="__main__":
 
         err_o, err_d = point_to_point(np.array([target_x, target_y]), P[0:2])
 
-        speed_right, speed_left = speed_control(err_o, err_d)
+        [speed_left, speed_right] = speed_control(err_o, err_d)
         m.move(speed_left, speed_right)
