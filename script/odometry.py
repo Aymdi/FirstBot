@@ -6,7 +6,7 @@ from constants import R
 
 if __name__=="__main__":
     P = np.array([0, 0, 0])
-    plotter = Plotter(1000, 1000, 60.0)
+    plotter = Plotter(1000, 1000, 6)
     m = motor.motor()
     posa_a, pos_b = m.get_position()
     while(True):

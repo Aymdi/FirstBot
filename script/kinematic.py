@@ -25,8 +25,8 @@ def angle_diff(a,b):
     return d
 
 def point_to_point(p1, p2):
-    d = p2 - p1
-    return [np.arctan2(d[1], d[0]), np.linalg.norm(d)]
+    d = p1 - p2[0:2]
+    return [angle_diff(np.arctan2(d[1], d[0]), p2[2]), np.linalg.norm(d)]
 
 def speed_control(vr, vl):
-        return (vl + vr * np.array([1, -1]))/R
+        return (vl + vr * L  * np.array([-1, 1]))/R
