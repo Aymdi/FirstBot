@@ -14,7 +14,7 @@ def position(color_start, color_end, cam):
   mask = cv2.inRange(hsv, color_start , color_end)
 
   # ligne de test allant de mask[0,0] à mask[img.shape[0],0]
-  for y1 in range (0,img.shape[0]):
+  for y1 in range (0,img.shape[1]):
     if(mask[200,y1] == 255):
       S1 += y1
       n1 += 1
@@ -24,7 +24,7 @@ def position(color_start, color_end, cam):
   #     B = y2
   #     break
 
-  for y3 in range (0,img.shape[0]):
+  for y3 in range (0,img.shape[1]):
     if(mask[300,y3] == 255):
       S2 += y3
       n2 += 1

@@ -42,11 +42,12 @@ if __name__ == "__main__":
 
             print(TARGET_X, " ", VID_WIDTH, " ",x)
 
-            delta = x - TARGET_X
-            a = 0.0001
-            b = 150
+            delta = TARGET_X - x
+            a = 0.001
+            b = 1000
+            c = 5
             print(delta)
-            [speed_1, speed_2] = speed_control(a * delta, 1/(np.absolute(delta) + 1) * b)
+            [speed_1, speed_2] = speed_control(a * delta, np.exp(-delta*delta/b/b) * c)
 
             print(speed_1, " ", speed_2)
             robot.move(left_value=speed_1, right_value=speed_2)
