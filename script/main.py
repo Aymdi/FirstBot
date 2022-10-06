@@ -7,13 +7,15 @@ from colors import Colors
 from autopilot import Autopilot
 from kinematic import speed_control
 from suiviLigne import *
+import time
 
 MODE = "RACING"
-(COLOR_START, COLOR_END) = Colors.RED.value
+(COLOR_START, COLOR_END) = Colors.GREEN.value
 VID_WIDTH = 600
 TARGET_X = VID_WIDTH // 2
 MAX_SPEED = 1
 DELTA_MAX = 1000
+TRACK = 0
 
 if __name__ == "__main__":
 
@@ -22,8 +24,10 @@ if __name__ == "__main__":
     elif sys.argv.__len__() == 3:
         color = sys.argv[2]
         if color == "RED":
+            TRACK = 2
             (COLOR_START, COLOR_END) = Colors.RED.value
         if color == "BLUE":
+            TRACK = 1
             (COLOR_START, COLOR_END) = Colors.BLUE.value
         if color == "GREEN":
             (COLOR_START, COLOR_END) = Colors.GREEN.value
@@ -35,21 +39,60 @@ if __name__ == "__main__":
     VID_WIDTH = cam.get(cv2.CAP_PROP_FRAME_WIDTH)
     TARGET_X = VID_WIDTH // 2
     autopilot = Autopilot(MAX_SPEED, DELTA_MAX)
+    yel_start, yel_end = Colors.YELLOW.value
+
+    t = [0, 0, 0]
+    t_start = time.time()
+    t_end = 0
 
     try:
         while True:
+            t_end = time.time()
+            if t_end - t_start > 10:
+                if get_swap(np.array(yel_start), np.array(yel_end), cam):
+                    t[TRACK] = t_end - t_start
+                    TRACK += 1
+                    t_start = time.time()
+                    if TRACK == 1:
+                        (COLOR_START, COLOR_END) = Colors.BLUE.value
+                    elif TRACK == 2:
+                        (COLOR_START, COLOR_END) = Colors.RED.value
+                    elif TRACK == 3:
+                        robot.stop()
+                        robot.unclock()
+                        print(t[0], t[1], t[2])
+                        break
+
+
             (y, x) = position(np.array(COLOR_START), np.array(COLOR_END), cam)
 
-            print(TARGET_X, " ", VID_WIDTH, " ",x)
-
             delta = TARGET_X - x
-            a = 0.001
-            b = 1000
-            c = 5
-            print(delta)
-            [speed_1, speed_2] = speed_control(a * delta, np.exp(-delta*delta/b/b) * c)
 
-            print(speed_1, " ", speed_2)
+            a = 0.0033
+            b = 1000
+            c = 6
+
+            if TRACK == 0:
+                a = 0.0025
+                c = 25
+
+            if TRACK == 1:
+                a = 0.0037
+                c = 14
+
+            if np.absolute(delta) > 310 :
+                a = 0
+
+            if np.absolute(delta) > 310 and TRACK == 1:
+                delta = - np.absolute(delta)
+                a = 0.001
+
+            if np.absolute(delta) > 310 and TRACK == 2:
+                delta = np.absolute(delta)
+                a = 0.001
+
+            [speed_1, speed_2] = speed_control(a * delta, np.exp(-delta * delta / b / b) * c)
+
             robot.move(left_value=speed_1, right_value=speed_2)
     finally:
         print("exit")
