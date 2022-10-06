@@ -7,7 +7,7 @@ from constants import R
 
 if __name__=="__main__":
     P = np.array([0, 0, 0])
-    plotter = Plotter(1000, 1000)
+    plotter = Plotter(1000, 1000, 60.0)
     m = motor.motor()
 
     target_x = float(input("Target X coordinate :"))
