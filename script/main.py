@@ -51,7 +51,7 @@ if __name__ == "__main__":
     P = np.array([0, 0, 0])
     pos_a, pos_b = robot.get_position()
 
-    with open("odometry.txt", 'w') as fp:
+    with open("main.txt", 'w') as fp:
         for j in range(len(P)):
             fp.write(str(P[j]))
             if(j < len(P) - 1):
