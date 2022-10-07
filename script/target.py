@@ -39,4 +39,10 @@ if __name__=="__main__":
         m.stop()
         m.unclock()
         with open("target.txt", 'w') as fp:
-            fp.write('\n'.join(L))
+            for i in range(len(L)):
+                for j in range(len(L[i])):
+                    fp.write(str(L[i][j]))
+                    if(j < len(L[i]) - 1):
+                        fp.write(" ")
+                if(i < len(L) - 1):
+                    fp.write("\n")
