@@ -5,10 +5,10 @@
 
 ## Demo
 
-- **demo video:**
+**demo video:**
 https://drive.google.com/file/d/1bPGpWisS0LHQt50_dWyhDEzxcsQP_EZD/view?usp=sharing
 
-- **odmetry:**
+**odmetry:**
 ![](./script/tracking3.png)
 
 
