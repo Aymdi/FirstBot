@@ -8,6 +8,8 @@ from autopilot import Autopilot
 from kinematic import speed_control
 from suiviLigne import *
 import time
+from kinematic import angle_diff, next_position
+from constants import R
 
 MODE = "RACING"
 (COLOR_START, COLOR_END) = Colors.GREEN.value
@@ -45,6 +47,12 @@ if __name__ == "__main__":
     t_start = time.time()
     t_end = 0
 
+
+    P = np.array([0, 0, 0])
+    pos_a, pos_b = robot.get_position()
+    L=[]
+    L.append(P)
+
     try:
         while True:
             t_end = time.time()
@@ -65,6 +73,8 @@ if __name__ == "__main__":
 
 
             (y, x) = position(np.array(COLOR_START), np.array(COLOR_END), cam)
+
+            print(TARGET_X, " ", VID_WIDTH, " ",x)
 
             delta = TARGET_X - x
 
@@ -93,10 +103,25 @@ if __name__ == "__main__":
 
             [speed_1, speed_2] = speed_control(a * delta, np.exp(-delta * delta / b / b) * c)
 
+            print(speed_1, " ", speed_2)
             robot.move(left_value=speed_1, right_value=speed_2)
+
+            pos_a_new, pos_b_new = robot.get_position()
+
+            P = next_position(P, R * angle_diff(pos_a_new, posa_a), -R * angle_diff(pos_b_new, pos_b))
+            posa_a = pos_a_new
+            pos_b = pos_b_new
     finally:
         print("exit")
         cam.release()
         cv2.destroyAllWindows()
         robot.stop()
         robot.unclock()
+        with open("main.txt", 'w') as fp:
+            for i in range(len(L)):
+                for j in range(len(L[i])):
+                    fp.write(str(L[i][j]))
+                    if(j < len(L[i]) - 1):
+                        fp.write(" ")
+                if(i < len(L) - 1):
+                    fp.write("\n")
