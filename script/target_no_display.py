@@ -39,13 +39,11 @@ if __name__=="__main__":
 
 
 
-            err_o, err_d = point_to_point(np.array([target_x, target_y]), P)
-            #print(P)
+                err_o, err_d = point_to_point(np.array([target_x, target_y]), P)
 
-            if(abs(err_d) >= 0.2):
-                [speed_left, speed_right] = speed_control(0.4*err_o, 0.5*err_d + 0.1)
-                #print([speed_left, speed_right])
-                m.move(speed_left, speed_right)
+                if(abs(err_d) >= 0.2):
+                    [speed_left, speed_right] = speed_control(0.4*err_o, 0.5*err_d + 0.1)
+                    m.move(speed_left, speed_right)
 
         finally:
             m.stop()
