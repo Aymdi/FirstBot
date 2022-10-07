@@ -3,6 +3,10 @@
 
 ![](./robot.jpg)
 
+## Demo
+
+https://drive.google.com/file/d/1bPGpWisS0LHQt50_dWyhDEzxcsQP_EZD/view?usp=sharing
+
 ## Project Goals
 
 The goal of the FirstBot project is to build your own first robot, which implies:
