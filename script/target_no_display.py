@@ -7,12 +7,11 @@ from constants import R
 
 if __name__=="__main__":
     P = np.array([0, 0, 0])
-    plotter = Plotter(1000, 1000, 6.0)
     m = motor.motor()
 
     target_x = float(input("Target X coordinate :"))
     target_y = float(input("Target Y coordinate :"))
-    
+
     posa_a, pos_b = m.get_position()
     L=[]
     L.append(P)
@@ -20,7 +19,6 @@ if __name__=="__main__":
         while(True):
             pos_a_new, pos_b_new = m.get_position()
             P = next_position(P, R * angle_diff(pos_a_new, posa_a), -R * angle_diff(pos_b_new, pos_b))
-            plotter.plot2(P[0], P[1])
             posa_a = pos_a_new
             pos_b = pos_b_new
 
