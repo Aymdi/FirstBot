@@ -15,7 +15,7 @@ https://drive.google.com/file/d/1bPGpWisS0LHQt50_dWyhDEzxcsQP_EZD/view?usp=shari
 
 ## Project Goals
 
-The goal of the FirstBot project is to build your own first robot, which implies:
+The goal of the FirstBot project is to build our own first robot, which implies:
 
 - Drawing our own frame using CAD software and tools from FabLab.
 - Discovering how on-shelf actuators works.
